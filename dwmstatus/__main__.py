@@ -4,11 +4,11 @@ from dwmstatus.dwmstatus import *
 def main():
     unread = imap_unread()
     while True:
-        status = '[Mail: ' + str(unread) + '] '
+        status = '[Mail: ' + str(unread if unread >= 0 else '-') + '] '
         today = datetime.datetime.today()
         status += today.strftime('%Y-%m-%d %H:%M')
         os.system('xsetroot -name "' + status + '"')
-        if int(today.strftime('%M')) % 5 == 0:
+        if int(today.strftime('%M')) % 5 == 0 or unread < 0:
             unread = imap_unread()
         time.sleep(60)
 

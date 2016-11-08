@@ -10,5 +10,5 @@ def imap_unread():
         obj.select()
         unread_mail_count = len(obj.search(None, 'UnSeen')[1][0].split())
     except Exception as e:
-        unread_mail_count = '-'
+        unread_mail_count = -1
     return unread_mail_count
