@@ -5,11 +5,12 @@ import dwmstatus.config
 def main():
     unread = -1
     num_retry = 0
+    dwmstatus.config.init()
     config = dwmstatus.config.config()
     while True:
         today = datetime.datetime.today()
         if int(today.strftime('%M')) % 5 == 0 or unread < 0:
-            unread = imap_unread()
+            unread = imap_unread(config)
         if unread < 0 and num_retry < 3:
             num_retry += 1
             continue
