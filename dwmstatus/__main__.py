@@ -1,9 +1,11 @@
 import os, datetime, time
 from dwmstatus.dwmstatus import *
+import dwmstatus.config
 
 def main():
     unread = -1
     num_retry = 0
+    config = dwmstatus.config.config()
     while True:
         today = datetime.datetime.today()
         if int(today.strftime('%M')) % 5 == 0 or unread < 0:
@@ -13,6 +15,7 @@ def main():
             continue
         num_retry = 0
         status = '[Mail: ' + str(unread if unread >= 0 else '-') + '] '
+        today += datetime.timedelta(hours = config('utc_delta'))
         status += today.strftime('%Y-%m-%d %H:%M')
         os.system('xsetroot -name "' + status + '"')
         time.sleep(60)
