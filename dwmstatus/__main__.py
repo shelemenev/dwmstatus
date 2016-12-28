@@ -16,7 +16,7 @@ def main():
             num_retry += 1
             continue
         num_retry = 0
-        status = '[Mail: ' + str(unread if unread >= 0 else '-') + '] ' + bat + ' '
+        status = '[Mail: ' + str(unread if unread >= 0 else '-') + '] [' + bat + '] '
         today += datetime.timedelta(hours = config('utc_delta'))
         status += today.strftime('%A %Y-%m-%d %H:%M')
         os.system('xsetroot -name "' + status + '"')
