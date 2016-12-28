@@ -1,4 +1,4 @@
-import imaplib, socket, dwmstatus.config
+import imaplib, socket, dwmstatus.config, subprocess, re
 
 def imap_unread(config):
     socket.setdefaulttimeout(10)
@@ -11,3 +11,6 @@ def imap_unread(config):
     except Exception as e:
         unread_mail_count = -1
     return unread_mail_count
+
+def battery():
+    return re.sub('[^0-9%]', '', subprocess.getoutput('upower -i $(upower -e | grep BAT) | grep percentage'))

@@ -11,11 +11,12 @@ def main():
         today = datetime.datetime.today()
         if int(today.strftime('%M')) % 5 == 0 or unread < 0:
             unread = imap_unread(config)
+            bat = battery()
         if unread < 0 and num_retry < 3:
             num_retry += 1
             continue
         num_retry = 0
-        status = '[Mail: ' + str(unread if unread >= 0 else '-') + '] '
+        status = '[Mail: ' + str(unread if unread >= 0 else '-') + '] ' + bat + ' '
         today += datetime.timedelta(hours = config('utc_delta'))
         status += today.strftime('%A %Y-%m-%d %H:%M')
         os.system('xsetroot -name "' + status + '"')
