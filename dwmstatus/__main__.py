@@ -8,6 +8,7 @@ def main():
     dwmstatus.config.init()
     config = dwmstatus.config.config()
     os.system('feh --bg-scale ~/source/wallpaper.jpg')
+    os.system('xset s off -dpms')
     while True:
         today = datetime.datetime.today()
         if int(today.strftime('%M')) % 5 == 0 or unread < 0:
